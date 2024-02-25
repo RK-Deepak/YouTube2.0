@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+      "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+      "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  height: 100vh;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+      monospace;
+}
+
+.load-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #fdba2c;
+}
+.bar {
+  content: "";
+  display: inline;
+  position: absolute;
+  width: 0;
+  height: 100%;
+  left: 50%;
+  text-align: center;
+}
+.bar:nth-child(1) {
+  background-color: #da4733;
+  animation: loading 3s linear infinite;
+}
+.bar:nth-child(2) {
+  background-color: #3b78e7;
+  animation: loading 3s linear 1s infinite;
+}
+.bar:nth-child(3) {
+  background-color: #fdba2c;
+  animation: loading 3s linear 2s infinite;
+}
+@keyframes loading {
+  from {
+      left: 50%;
+      width: 0;
+      z-index: 100;
+  }
+  33.3333% {
+      left: 0;
+      width: 100%;
+      z-index: 10;
+  }
+  to {
+      left: 0;
+      width: 100%;
+  }
+}
+
+.custom-h {
+  height: auto !important;
+}
+@media screen and (min-width: 1024px) {
+  .custom-h {
+      height: 100vh !important;
+  }
+}
+
+/* CSS */
+
+.shimmer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0.5rem;
+  width: 290px;
+  height: 279px;
+  flex-wrap: wrap;
+}
+
+.shimmer-container > div {
+  flex: 1;
+}
+
+.shimmer-thumbnail {
+  width: 100%;
+  height: 140px;
+  background-color: #ddd;
+  border-radius: 0.25rem;
+  animation: shimmer-animation 1s infinite linear, shimmer-fade 1s infinite alternate;
+}
+
+.shimmer-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.shimmer-author {
+  width: 100%;
+  height: 1rem;
+  background-color: #ccc; /* Change color as needed */
+  border-radius: 0.25rem;
+  animation: shimmer-animation 1s infinite linear, shimmer-fade 1s infinite alternate;
+}
+
+.shimmer-stats {
+  width: 100%;
+  height: 1rem;
+  background-color: #bbb; /* Change color as needed */
+  border-radius: 0.25rem;
+  animation: shimmer-animation 1s infinite linear, shimmer-fade 1s infinite alternate;
+}
+
+@keyframes shimmer-animation {
+  0% {
+    background-position: -200%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
+@keyframes shimmer-fade {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* //react player */
+.custom_link a
+{
+  color: rgb(15, 224, 8);
+}
+
+.scrollbtns::-webkit-scrollbar
+{
+   display: none;
+}
+.active 
+{
+  background-color: rgba(15, 179, 15, 0.856);
+}
+
+/* //voice recognisation */
+.listeningeffect {
+   
+  border-radius: 100%; /* Ensure it's a perfect circle */
+   /* Set the initial background color */
+  overflow: hidden; /* Hide overflow to ensure the animation starts from the center */
+ 
+}
+
+.listeningeffect:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(250, 5, 5, 0.514); /* Set the background color to match */
+  border-radius: 100%; /* Ensure it's a perfect circle */
+  transform: translate(-50%, -50%);
+  animation: expandCircle 2s linear infinite; /* Apply the animation */
+}
+
+@keyframes expandCircle {
+  0% {
+    width: 0%; /* Start with no width */
+    height: 0%; /* Start with no height */
+  }
+  25% {
+    width: 20%; /* Expand to double the size */
+    height: 20%; /* Expand to double the size */
+  }
+  50%{
+    width: 40%; /* Expand to double the size */
+    height: 40%; 
+  }
+  75% 
+  {
+    width: 20%; /* Expand to double the size */
+    height: 20%; 
+  }
+  100%
+  {
+    width: 0%; /* Expand to double the size */
+    height: 0%;
+  }
+
+}
+
+
+
