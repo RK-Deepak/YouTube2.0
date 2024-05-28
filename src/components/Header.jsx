@@ -102,30 +102,44 @@ const Header = ({ setIsListening }) => {
   };
 
   useEffect(() => {
-    let timerid;
-
-    if (timerid) {
-      clearInterval(timerid);
+    let timerId;
+  
+    if (timerId) {
+      clearInterval(timerId);
     }
-    timerid = setTimeout(() => {
-      async function fetchsuggestion() {
+    
+    timerId = setTimeout(() => {
+      async function fetchSuggestions() {
         if (searchquery !== "") {
-          const responsedata = await fetch(
-            `https://corsproxy.org/?https%3A%2F%2Fsuggestqueries.google.com%2Fcomplete%2Fsearch%3Fclient%3Dfirefox%26ds%3Dyt%26q%3D${searchquery}`
-          );
-          const obj = await responsedata.json();
-
-         
-          setsuggestion(obj[1]);
+          const callbackName = 'jsonpCallback';
+  
+          // Construct the JSONP URL
+          const apiUrl = `https://suggestqueries.google.com/complete/search?client=firefox&q=${searchquery}&callback=${callbackName}`;
+  
+          // Define the JSONP callback function
+          window[callbackName] = function(data) {
+            const suggestions = data[1];
+            setsuggestion(suggestions);
+            delete window[callbackName]; // Clean up callback function
+          };
+  
+          // Create a script element
+          const script = document.createElement('script');
+          script.src = apiUrl;
+  
+          // Append the script element to the document body
+          document.body.appendChild(script);
         } else {
           setsuggestion(null);
         }
       }
-      fetchsuggestion();
+  
+      fetchSuggestions();
     }, 300);
-
-    return () => clearInterval(timerid);
+  
+    return () => clearInterval(timerId);
   }, [searchquery]);
+  
 
   function handleSuggestion(e) {
     setsearchquery(e.target.textContent);
